@@ -1,0 +1,58 @@
+.sticky-container {
+    position: sticky;
+}
+
+
+.sticky-container.no-sticky {
+    position: relative;
+    overflow: visible;
+}
+
+.sticky-container.no-sticky .phoneImage {
+    position: relative;
+}
+
+
+
+.chip-section{
+    position: sticky;
+}
+
+.the-chip.transparent {
+    background-color: transparent;
+}
+
+video {
+    height: 100vh;
+    width: auto;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#logo .chip {
+    fill: #fff
+}
+
+#logo .text-bg{
+    fill: #fff;
+}
+
+#logo .chip-mask {
+    fill: #000;
+}
+
+.sticky-think{
+    position: sticky;
+}
+
+.cls-1 {
+    fill: #fff;
+}
+
+.cls-2 {
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    stroke-width: 6px;
+}

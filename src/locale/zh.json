@@ -1,0 +1,28 @@
+{
+  "app.hero.title1": "宿舍不让养猫怎么办",
+  "app.hero.title2": "那就让",
+  "app.hero.title3": "帮你",
+  "app.hero.title4": "一个",
+  "app.hero.desc": "欢迎使用我的网站，通过最新的AIGC技术生成心仪的猫猫图片，随时随地云养猫",
+  "app.hero.generate": "立刻体验",
+
+  "app.scroll.firstSentence": "橘、白、黑、肥、瘦",
+  "app.scroll.secondSentence": "英国佬",
+  "app.scroll.thirdSentence": "美国佬！",
+
+  "app.join.title": "即刻领养猫猫",
+  "app.join.desc": "现在注册成为元老会员，快人一步，享受免费服务。",
+  "app.join.experience": "立刻体验",
+  "app.join.login": "登录",
+
+  "app.works.title": "看看我们的猫猫",
+  "app.works.desc": "———— 通过AIGC生成",
+
+  "app.2d.title": "三次元猫猫不行？",
+  "app.2d.desc": "那就来点二次元的！",
+
+  "app.neko.title1": "我知道你在想什么",
+  "app.neko.title2": "想看日本猫?(笑)",
+  "app.neko.title3": "满足你",
+  "app.neko.title4": "でもそれはいけません!"
+}
