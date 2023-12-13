@@ -13,6 +13,7 @@ import FooterApp from "./app/FooterApp";
 
 import FrameBlurColorBlock from "./app/component/FrameBlurColorBlock";
 import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
 
 
 function App() {
@@ -25,9 +26,12 @@ function App() {
   }, [])
 
     const {t} = useTranslation();
+  const navigator = useNavigate();
 
   return (
     <div >
+        <button onClick={() => navigator('/auth/login')}>login</button>
+        <button onClick={() => navigator('/admin/editor')}>editor</button>
 
         {/* Hero Page */}
         <div className='w-full h-screen container flex mx-auto items-center justify-between'>

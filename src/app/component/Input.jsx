@@ -14,15 +14,15 @@ import classNames from "classnames";
  */
 export default function Input(props) {
 
-    const Classes = classNames('block w-full rounded-md border-0 py-1.5 pr-10 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6', {
+    const Classes = classNames('pl-2 block w-full rounded-md border-0 py-1.5 pr-10 ring-1 focus:opacity-40 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6', {
         'text-red-900': props.error,
         'ring-red-300': props.error,
         'placeholder:text-red-300': props.error,
         'focus:ring-red-500': props.error,
-    });
+    }, props.className);
 
     return (
-        <div>
+        <div className='w-full w-xl mx-2 mb-6'>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 {props.label}
             </label>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useCallback, useEffect, useRef} from "react";
 import more from '../../assets/more.png';
 import {useTranslation} from "react-i18next";
 
@@ -7,8 +7,7 @@ function MoreGetScreenApp() {
     const containerRef = useRef(null);
     const imageRef = useRef(null);
 
-
-    useEffect(() => {
+    const handleResize = useCallback(() => {
         const curH = containerRef.current.clientHeight;
         const curWidth = containerRef.current.clientWidth;
         const curOffset = curWidth / 2;
@@ -21,25 +20,16 @@ function MoreGetScreenApp() {
 
         imageRef.current.style.bottom = `-${curH / 2.9}px`;
         imageRef.current.style.left = `${leftOffset}px`;
+    },[])
+
+    useEffect(() => {
+        handleResize();
     }, [])
 
 
     useEffect(() => {
-        window.addEventListener('resize', () => {
-            const curH = containerRef.current.clientHeight;
-            const curWidth = containerRef.current.clientWidth;
-            const curOffset = curWidth / 2;
-
-            const imageWidth = imageRef.current.clientWidth;
-            const imageOffset = imageWidth / 2;
-
-            const leftOffset = curOffset - imageOffset;
-
-
-            imageRef.current.style.bottom = `-${curH / 2.9}px`;
-            imageRef.current.style.left = `${leftOffset}px`;
-        })
-
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
     }, [containerRef, imageRef])
 
     const {t} = useTranslation();

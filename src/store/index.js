@@ -1,16 +1,18 @@
 import {makeAutoObservable} from "mobx";
 
 class User {
-    userId = '';
+    userId = 'uusiax121d';
     user = {};
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
+        this.user = {};
     }
 
     setUser(user) {
         this.user = user;
     }
+
 
     setUserId(id) {
         this.userId = id;
@@ -18,7 +20,7 @@ class User {
 }
 
 const store = {
-    user: new User()
+    userStore: new User(),
 };
 
 

@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {ports} from "../../utils/ports";
+import '@wangeditor/editor/dist/css/style.css';
 
 function ArticleApp() {
     let params = useParams();

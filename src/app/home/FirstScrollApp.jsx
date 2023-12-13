@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, {forwardRef, useCallback, useEffect, useRef} from 'react';
 import './index.css';
 import cat from '../../assets/cat.png';
 import {useTranslation} from "react-i18next";
@@ -8,26 +8,27 @@ function FirstScrollApp(props) {
     const white = useRef(null);
     const red = useRef(null);
 
+    const scrollFunc = useCallback(e => {
+
+        const total = document.documentElement.scrollTop;
+        const firstScreen = document.documentElement.clientHeight;
+
+        if (total > firstScreen && total < 3 * firstScreen) {
+            let noStickyOffset = document.documentElement.clientHeight * 2; // 当前html可视窗口位置大小 * 2
+
+            let currentDocumentTop = total - firstScreen;
+            let scrolled = currentDocumentTop / noStickyOffset;
+            // console.log('打印监听： -> ', scrolled);
+
+            white.current.style.clipPath = `inset(${((0.5 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
+            red.current.style.clipPath = `inset(${((1 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
+        }
+    }, [])
 
     useEffect(() => {
+        window.addEventListener('scroll', scrollFunc)
 
-        window.addEventListener('scroll', e => {
-
-            const total = document.documentElement.scrollTop;
-            const firstScreen = document.documentElement.clientHeight;
-
-            if (total > firstScreen && total < 3 * firstScreen) {
-                let noStickyOffset = document.documentElement.clientHeight * 2; // 当前html可视窗口位置大小 * 2
-
-                let currentDocumentTop = total - firstScreen;
-                let scrolled = currentDocumentTop / noStickyOffset;
-                // console.log('打印监听： -> ', scrolled);
-
-                white.current.style.clipPath = `inset(${((0.5 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
-                red.current.style.clipPath = `inset(${((1 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
-            }
-        })
-
+        return () => window.removeEventListener('scroll', scrollFunc)
     }, [white.current, red.current])
 
     const {t} = useTranslation();

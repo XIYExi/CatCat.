@@ -5,16 +5,14 @@ import './i18n';
 import reportWebVitals from './reportWebVitals';
 import {RouterProvider} from 'react-router-dom';
 import router from "./router";
-import {observer} from "mobx-react";
 import {Provider} from "mobx-react";
 import store from "./store";
 
 
 
 function WrapperApp(){
-    const pageRef = useRef(null);
     return(
-        <div ref={pageRef}>
+        <div>
             <Provider {...store}>
                 {/*pages*/}
                 <RouterProvider router={router} />
@@ -23,7 +21,7 @@ function WrapperApp(){
     )
 }
 
-const App = observer(WrapperApp);
+const App = WrapperApp;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

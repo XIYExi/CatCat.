@@ -1,5 +1,5 @@
 import './index.css';
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 
 function ShowScreenApp() {
@@ -11,43 +11,46 @@ function ShowScreenApp() {
 
     const {t} = useTranslation();
 
+    const scrollFunc = useCallback(e => {
+
+        // console.log(document.documentElement.scrollTop, document.documentElement.scrollHeight)
+
+        // scrolled = (?==0) / (3000 - 1005)
+        let scrolled = (document.documentElement.scrollTop - 5 * document.documentElement.clientHeight) / (containerRef.current.scrollHeight - document.documentElement.clientHeight);
+
+        logoWrapperRef.current.style.width = logoWrapperRef.current.style.height = document.documentElement.clientHeight * 20 * (scrolled * scrolled * scrolled) + 'px';
+
+        if (scrolled <= .1) {
+            textRef.current.style.opacity = (.1 - scrolled) / .1;
+            textRef.current.style.marginTop = scrolled * 1000 * -1 + 'px';
+        }
+        else
+            textRef.current.style.opacity = 0;
+
+        /*由于存在偏移，最开始的时候可能为负，那就手动置为0，不置也没事*/
+        if (scrolled <= .2)
+            logoRef.current.style.opacity = (scrolled - .1 ) / .1 < 0 ? 0 : (scrolled - .1 ) /.1 < 0;
+        else
+            logoRef.current.style.opacity = 1;
+
+        if (scrolled >= .5) {
+            logoRef.current.style.opacity = ( 1- scrolled ) / .5;
+            logoWrapperRef.current.classList.add('transparent');
+        }
+        else{
+            logoWrapperRef.current.classList.remove('transparent');
+        }
+
+        if (scrolled >= .95)
+            logoWrapperRef.current.style.opacity = (1 - scrolled) / .05;
+        else
+            logoWrapperRef.current.style.opacity = 1;
+    },[])
+
     useEffect(() => {
 
-        window.addEventListener('scroll', e => {
-
-            // console.log(document.documentElement.scrollTop, document.documentElement.scrollHeight)
-
-            // scrolled = (?==0) / (3000 - 1005)
-            let scrolled = (document.documentElement.scrollTop - 5 * document.documentElement.clientHeight) / (containerRef.current.scrollHeight - document.documentElement.clientHeight);
-
-            logoWrapperRef.current.style.width = logoWrapperRef.current.style.height = document.documentElement.clientHeight * 20 * (scrolled * scrolled * scrolled) + 'px';
-
-            if (scrolled <= .1) {
-                textRef.current.style.opacity = (.1 - scrolled) / .1;
-                textRef.current.style.marginTop = scrolled * 1000 * -1 + 'px';
-            }
-            else
-                textRef.current.style.opacity = 0;
-
-            /*由于存在偏移，最开始的时候可能为负，那就手动置为0，不置也没事*/
-            if (scrolled <= .2)
-                logoRef.current.style.opacity = (scrolled - .1 ) / .1 < 0 ? 0 : (scrolled - .1 ) /.1 < 0;
-            else
-                logoRef.current.style.opacity = 1;
-
-            if (scrolled >= .5) {
-                logoRef.current.style.opacity = ( 1- scrolled ) / .5;
-                logoWrapperRef.current.classList.add('transparent');
-            }
-            else{
-                logoWrapperRef.current.classList.remove('transparent');
-            }
-
-            if (scrolled >= .95)
-                logoWrapperRef.current.style.opacity = (1 - scrolled) / .05;
-            else
-                logoWrapperRef.current.style.opacity = 1;
-        })
+        window.addEventListener('scroll',scrollFunc);
+        return () => window.removeEventListener('scroll', scrollFunc);
     }, [])
 
     return (
